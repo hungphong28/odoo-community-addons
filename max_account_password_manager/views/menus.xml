@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_password_manager_root"
+              name="Mật khẩu"
+              parent="base.menu_custom"
+              sequence="85"
+              groups="max_account_password_manager.group_password_manager_technical_admin"/>
+
+    <menuitem id="menu_password_manager_records"
+              name="Bản ghi mật khẩu"
+              parent="menu_password_manager_root"
+              action="action_max_account_password_record"
+              sequence="10"
+              groups="max_account_password_manager.group_password_manager_technical_admin"/>
+
+    <menuitem id="menu_password_manager_logs"
+              name="Nhật ký mật khẩu"
+              parent="menu_password_manager_root"
+              action="action_max_account_password_log"
+              sequence="20"
+              groups="max_account_password_manager.group_password_manager_technical_admin"/>
+</odoo>

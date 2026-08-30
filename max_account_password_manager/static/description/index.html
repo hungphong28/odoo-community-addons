@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <title>Quản lý mật khẩu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            color: #1f2937;
+            background: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 32px 28px 48px;
+        }
+
+        .hero {
+            padding: 28px 30px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+            color: #0f172a;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #475569;
+            font-size: 16px;
+        }
+
+        .section {
+            margin-top: 28px;
+            padding-top: 6px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            color: #111827;
+            margin: 0 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section h3 {
+            font-size: 17px;
+            color: #111827;
+            margin: 18px 0 8px;
+        }
+
+        .box {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px 20px;
+            background: #ffffff;
+            margin: 14px 0;
+        }
+
+        .box h3 {
+            margin-top: 0;
+        }
+
+        .notice {
+            border-left: 4px solid #2563eb;
+            background: #eff6ff;
+        }
+
+        .warning {
+            border-left: 4px solid #d97706;
+            background: #fffbeb;
+        }
+
+        .path {
+            display: block;
+            padding: 12px 14px;
+            margin: 12px 0;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: Consolas, Monaco, monospace;
+            color: #111827;
+        }
+
+        ul, ol {
+            margin-top: 8px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .feature-list {
+            margin-top: 8px;
+        }
+
+        .feature-item {
+            padding: 16px 18px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: #ffffff;
+        }
+
+        .feature-item h3 {
+            margin: 0 0 6px;
+            font-size: 17px;
+            color: #0f172a;
+        }
+
+        .feature-item p {
+            margin: 0;
+            color: #374151;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            margin-bottom: 18px;
+            table-layout: auto;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 11px 13px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f9fafb;
+            color: #111827;
+            font-weight: 700;
+        }
+
+        td:first-child {
+            width: 34%;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .steps {
+            counter-reset: step;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .steps li {
+            position: relative;
+            padding-left: 42px;
+            margin: 12px 0;
+        }
+
+        .steps li:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            border-radius: 50%;
+            background: #1f2937;
+            color: #ffffff;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 36px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        @media (max-width: 720px) {
+            .page {
+                padding: 20px 14px 36px;
+            }
+
+            .hero {
+                padding: 22px 18px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                border: 1px solid #e5e7eb;
+                border-radius: 10px;
+                margin-bottom: 12px;
+                overflow: hidden;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            td:first-child {
+                width: auto;
+                background: #f9fafb;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="hero">
+        <h1>Quản lý mật khẩu</h1>
+        <p>
+            Module hỗ trợ quản trị viên kỹ thuật ghi nhận, đặt lại, sao chép và theo dõi lịch sử thao tác mật khẩu
+            người dùng trong Odoo. Tất cả chức năng được kiểm soát bằng phân quyền riêng và có nhật ký phục vụ
+            kiểm tra nội bộ.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>1. Tổng quan</h2>
+        <p>
+            <strong>Quản lý mật khẩu</strong> được dùng trong các tình huống quản trị viên cần hỗ trợ người dùng
+            đăng nhập, kiểm tra tài khoản hoặc xử lý yêu cầu vận hành liên quan đến mật khẩu.
+        </p>
+        <p>
+            Module chỉ dành cho nhân sự được ủy quyền. Người dùng không thuộc nhóm quyền phù hợp sẽ không thấy menu,
+            không thấy smart button và không thể truy cập bản ghi mật khẩu.
+        </p>
+
+        <div class="box warning">
+            <strong>Lưu ý bảo mật:</strong>
+            mật khẩu được ghi nhận để phục vụ vận hành nội bộ. Chỉ cấp quyền cho quản trị viên kỹ thuật có trách nhiệm.
+            Các thao tác đặt, tự động ghi nhận và sao chép mật khẩu đều được lưu trong nhật ký.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Vị trí menu</h2>
+        <p>Menu chính của module nằm trong khu vực kỹ thuật:</p>
+        <span class="path">Settings / Technical / Mật khẩu</span>
+
+        <ul>
+            <li><strong>Bản ghi mật khẩu:</strong> nơi quản lý các mật khẩu đã được hệ thống ghi nhận.</li>
+            <li><strong>Nhật ký mật khẩu:</strong> nơi theo dõi lịch sử đặt, ghi nhận và sao chép mật khẩu.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. Phân quyền</h2>
+        <p>Module sử dụng nhóm quyền riêng:</p>
+        <span class="path">Quản lý mật khẩu / Quản trị kỹ thuật</span>
+
+        <p>Người dùng thuộc nhóm này có thể:</p>
+        <ul>
+            <li>Truy cập menu <strong>Mật khẩu</strong> trong phần kỹ thuật.</li>
+            <li>Xem bản ghi mật khẩu và nhật ký mật khẩu.</li>
+            <li>Sử dụng nút <strong>Đặt mật khẩu</strong> trên form người dùng.</li>
+            <li>Sử dụng smart button <strong>Mật khẩu</strong> để mở nhanh bản ghi mật khẩu của người dùng.</li>
+            <li>Sao chép mật khẩu khi cần hỗ trợ vận hành.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. Tính năng chính</h2>
+
+        <div class="feature-list">
+            <div class="feature-item">
+                <h3>Đặt mật khẩu từ form người dùng</h3>
+                <p>
+                    Trên form <strong>Người dùng</strong>, quản trị viên bấm nút <strong>Đặt mật khẩu</strong>
+                    để nhập mật khẩu thủ công hoặc sinh mật khẩu tự động.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <h3>Smart button Mật khẩu</h3>
+                <p>
+                    Form người dùng có smart button <strong>Mật khẩu</strong>. Khi bấm vào, hệ thống mở bản ghi
+                    mật khẩu tương ứng của tài khoản đó nếu đã có.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <h3>Tự động ghi nhận mật khẩu</h3>
+                <p>
+                    Khi người dùng được tạo mới hoặc đổi mật khẩu qua luồng ghi vào trường mật khẩu của Odoo,
+                    module sẽ tự động tạo hoặc cập nhật bản ghi mật khẩu.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <h3>Đánh giá cường độ mật khẩu</h3>
+                <p>
+                    Wizard đặt mật khẩu đánh giá cường độ theo các mức:
+                    <strong>Yếu</strong>, <strong>Trung bình</strong>, <strong>Mạnh</strong> và
+                    <strong>Rất mạnh</strong>, kèm gợi ý cải thiện khi cần.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <h3>Sao chép mật khẩu có ghi log</h3>
+                <p>
+                    Mật khẩu không hiển thị trực tiếp dạng rõ trên danh sách. Người có quyền có thể sao chép mật khẩu
+                    từ form bản ghi, và thao tác này được ghi vào nhật ký.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <h3>Nhật ký truy cập</h3>
+                <p>
+                    Module ghi nhận các hành động quan trọng như đặt mật khẩu, tự động ghi nhận mật khẩu và sao chép
+                    mật khẩu, bao gồm người thực hiện và thời điểm thực hiện.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Các tình huống được ghi nhận</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Tình huống</th>
+                <th>Kết quả xử lý</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Quản trị viên đặt mật khẩu bằng wizard của module</td>
+                <td>Tạo hoặc cập nhật bản ghi mật khẩu, trạng thái <strong>Đang quản lý</strong>, ghi nhật ký đặt mật khẩu.</td>
+            </tr>
+            <tr>
+                <td>Quản trị viên tạo người dùng mới có mật khẩu</td>
+                <td>Tự động tạo bản ghi mật khẩu cho người dùng mới.</td>
+            </tr>
+            <tr>
+                <td>Quản trị viên đổi mật khẩu người dùng từ backend</td>
+                <td>Tự động cập nhật bản ghi mật khẩu hiện có hoặc tạo mới nếu chưa có.</td>
+            </tr>
+            <tr>
+                <td>Người dùng đăng ký tài khoản qua website</td>
+                <td>Nếu luồng đăng ký ghi mật khẩu qua cơ chế chuẩn của Odoo, module sẽ tự động ghi nhận mật khẩu.</td>
+            </tr>
+            <tr>
+                <td>Người dùng tự đổi mật khẩu</td>
+                <td>Nếu luồng đổi mật khẩu ghi vào trường mật khẩu của Odoo, module sẽ tự động cập nhật bản ghi.</td>
+            </tr>
+            <tr>
+                <td>Sao chép mật khẩu từ bản ghi</td>
+                <td>Sao chép mật khẩu vào clipboard và ghi nhận nhật ký sao chép.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>6. Trạng thái bản ghi mật khẩu</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Trạng thái</th>
+                <th>Ý nghĩa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Đang quản lý</td>
+                <td>Mật khẩu đã được module ghi nhận và có thể được quản trị viên có quyền sao chép khi cần.</td>
+            </tr>
+            <tr>
+                <td>Không đồng bộ</td>
+                <td>
+                    Trạng thái dự phòng cho trường hợp phát hiện mật khẩu đã thay đổi nhưng hệ thống không ghi nhận
+                    được giá trị mật khẩu mới.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>7. Hướng dẫn sử dụng</h2>
+
+        <h3>7.1. Cấp quyền sử dụng</h3>
+        <ol class="steps">
+            <li>Mở form người dùng quản trị cần cấp quyền.</li>
+            <li>Gán nhóm <strong>Quản lý mật khẩu / Quản trị kỹ thuật</strong>.</li>
+            <li>Lưu lại và tải lại giao diện nếu cần.</li>
+        </ol>
+
+        <h3>7.2. Đặt mật khẩu cho người dùng</h3>
+        <ol class="steps">
+            <li>Vào <strong>Settings / Users &amp; Companies / Users</strong>.</li>
+            <li>Mở người dùng cần xử lý.</li>
+            <li>Bấm nút <strong>Đặt mật khẩu</strong>.</li>
+            <li>Nhập mật khẩu hoặc bấm <strong>Tạo</strong> để sinh mật khẩu mạnh.</li>
+            <li>Kiểm tra cường độ mật khẩu, sau đó bấm <strong>Đặt mật khẩu</strong>.</li>
+        </ol>
+
+        <h3>7.3. Mở bản ghi mật khẩu từ form người dùng</h3>
+        <ol class="steps">
+            <li>Mở form người dùng.</li>
+            <li>Bấm smart button <strong>Mật khẩu</strong>.</li>
+            <li>Hệ thống sẽ mở bản ghi mật khẩu tương ứng nếu đã có.</li>
+        </ol>
+
+        <h3>7.4. Sao chép mật khẩu</h3>
+        <ol class="steps">
+            <li>Vào <strong>Settings / Technical / Mật khẩu / Bản ghi mật khẩu</strong>.</li>
+            <li>Mở bản ghi cần xử lý.</li>
+            <li>Bấm <strong>Sao chép mật khẩu</strong>.</li>
+            <li>Kiểm tra nhật ký nếu cần rà soát thao tác sau này.</li>
+        </ol>
+
+        <h3>7.5. Xem nhật ký mật khẩu</h3>
+        <ol class="steps">
+            <li>Vào <strong>Settings / Technical / Mật khẩu / Nhật ký mật khẩu</strong>.</li>
+            <li>Kiểm tra người dùng, hành động, thời gian thực hiện và người thực hiện.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>8. Lưu ý vận hành</h2>
+        <ul>
+            <li>Module bắt đầu ghi nhận mật khẩu kể từ thời điểm được cài đặt và kích hoạt.</li>
+            <li>Không thể khôi phục mật khẩu cũ đã tồn tại trước khi cài module nếu hệ thống chỉ còn lưu dạng mã hóa/hash.</li>
+            <li>Chỉ các luồng ghi mật khẩu qua cơ chế ORM/field password của Odoo mới được tự động ghi nhận.</li>
+            <li>Không nên cấp quyền module này cho người dùng không thuộc nhóm quản trị kỹ thuật.</li>
+            <li>Nên kiểm tra nhật ký sao chép mật khẩu định kỳ theo quy trình nội bộ.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        Module: max_account_password_manager · Author: hungphong28 · License: LGPL-3
+    </div>
+</div>
+</body>
+</html>

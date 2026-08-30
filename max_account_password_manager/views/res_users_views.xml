@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_password_manager" model="ir.ui.view">
+        <field name="name">res.users.form.password.manager</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/header" position="inside">
+                <button name="action_open_password_set_wizard"
+                        type="object"
+                        string="Đặt mật khẩu"
+                        class="btn-primary"
+                        groups="max_account_password_manager.group_password_manager_technical_admin"/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_managed_password_record"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-key"
+                        groups="max_account_password_manager.group_password_manager_technical_admin">
+                    <field name="managed_password_record_count" widget="statinfo" string="Mật khẩu"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
