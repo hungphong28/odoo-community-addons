@@ -1,0 +1,1 @@
+# Generic web UI extension.
